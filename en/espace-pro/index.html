@@ -19,7 +19,8 @@
   var embed = false;
   try { embed = window.self !== window.top || /[?&]embed=1/.test(location.search); } catch (e) { embed = true; }
   if (embed) { d.classList.add("is-embed"); return; }
-  var trailerPage = //trailer/?$/.test(location.pathname);
+  var path = location.pathname;
+  var trailerPage = path.endsWith("/trailer") || path.endsWith("/trailer/");
   if (trailerPage) { try { sessionStorage.setItem("hl-entered", "1"); } catch (e) {} }
   else { try { if (!sessionStorage.getItem("hl-entered")) d.classList.add("gate-on"); } catch (e) {} }
 })();
