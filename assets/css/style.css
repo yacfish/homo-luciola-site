@@ -1114,7 +1114,9 @@ li > .event-subtitle {
   outline-offset: 2px;
 }
 html.motion-ok body.has-scenes .pin-stage-facade:has(.gallery-tiles) {
-  align-content: start;
+  /* Keep heading + 4 tiles vertically centered when they fit; "safe"
+     falls back to start if the block overflows the stage (e.g. phones). */
+  align-content: safe center;
 }
 
 
@@ -1301,6 +1303,23 @@ html.motion-ok body.has-scenes .pin-stage-facade:has(.gallery-tiles) {
   html.motion-ok.has-motion-js body.has-scenes .pin-track.is-last-scene {
     height: 100vh;
     height: 100dvh;
+  }
+  /* Let the last fixed panel become sticky so the small footer can rise into view. */
+  html.motion-ok body.has-scenes .hero-track.is-last-scene .hero,
+  html.motion-ok body.has-scenes .intro-track.is-last-scene .page-intro,
+  html.motion-ok body.has-scenes .teaser-track.is-last-scene .teaser-public,
+  html.motion-ok body.has-scenes .pin-track.is-last-scene .pin-panel,
+  html.motion-ok.sda body.has-scenes .pin-track.is-last-scene .pin-panel,
+  html.motion-ok.has-motion-js body.has-scenes .pin-track.is-last-scene .pin-panel {
+    position: sticky;
+    top: var(--header);
+    inset: auto;
+    inset-inline: 0;
+    bottom: auto;
+    width: 100%;
+    height: calc(100svh - var(--header));
+    height: calc(100dvh - var(--header));
+    max-height: none;
   }
 }
 @keyframes hero-media-life {
@@ -1603,9 +1622,9 @@ html.motion-ok body.has-scenes .pin-stage-facade:has(.gallery-tiles) {
   padding: 0 0.55rem;
   cursor: pointer;
   font: inherit;
-  font-family: var(--font-display);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+  text-transform: none;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -1654,10 +1673,14 @@ html.motion-ok body.has-scenes .pin-stage-facade:has(.gallery-tiles) {
   color: var(--ink-dim);
   text-decoration: none;
   padding: 0.42rem 0.55rem;
-  font-family: var(--font-display);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+  text-transform: none;
   text-align: center;
+}
+.lang-option[lang="ja"],
+.lang-switch-btn .lang-current[lang="ja"] {
+  font-family: "Noto Lang Labels JP", "Noto Lang Labels", var(--font-display), sans-serif;
 }
 .lang-option:hover,
 .lang-option:focus-visible {
@@ -1712,7 +1735,6 @@ html.motion-ok body.has-scenes .pin-stage-facade:has(.gallery-tiles) {
     padding: 0.2rem 0.45rem;
   }
   .lang-option { padding: 0.7rem 1.1rem; font-size: 1rem; }
-  body.lang-menu-open { overflow: hidden; }
 }
 /* CJK and Arabic faces: per-language subsets built from used glyphs. */
 @font-face {
@@ -1730,6 +1752,13 @@ html.motion-ok body.has-scenes .pin-stage-facade:has(.gallery-tiles) {
   font-style: normal;
   font-display: swap;
   unicode-range: U+3040-30FF, U+31F0-31FF;
+}
+@font-face {
+  font-family: "Noto Lang Labels JP";
+  src: url("/assets/fonts/noto-lang-labels-jp.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "Noto Lang Labels";
@@ -2246,6 +2275,14 @@ html.gate-on .enter-gate.is-leaving { opacity: 0; pointer-events: none; }
   transition: border-color 0.2s ease, color 0.2s ease;
 }
 .enter-gate-btn:hover { border-color: var(--ink); color: #fff; }
+.fonts-sc .enter-gate-btn,
+.fonts-jp .enter-gate-btn,
+.fonts-kr .enter-gate-btn,
+.fonts-arabic .enter-gate-btn {
+  letter-spacing: 0;
+  text-indent: 0;
+  text-transform: none;
+}
 @media (prefers-reduced-motion: reduce) {
   html.gate-on .enter-gate { transition: none; }
 }
@@ -2360,7 +2397,7 @@ html.is-embed .section-steps { display: none !important; }
 
 /* Trial: trailer just under the menu, above the wordmark. Gap from the
    bar's bottom edge is half the header height. Aligned with the logo's
-   left edge (right-aligned on phones). No 12.5vw side gap. */
+   inline-start edge (inline-end on phones). No 12.5vw side gap. */
 .hero-mark-row {
   margin: 0 0 1.1rem;
   width: 100%;
@@ -2369,16 +2406,18 @@ html.is-embed .section-steps { display: none !important; }
 .hero-trailer {
   position: absolute;
   top: calc(var(--header) / 2);
-  /* Match the left edge of .hero-copy / the wordmark (and the menu stamp). */
-  left: var(--content-inset);
+  /* Match the inline-start edge of .hero-copy / the wordmark (and the menu stamp). */
+  inset-inline-start: var(--content-inset);
   z-index: 9;
   display: inline-flex;
+  flex-direction: row;
   align-items: center;
   gap: 0.75rem;
   color: var(--ink);
   border: 1px solid rgba(243, 236, 222, 0.55);
   background: rgba(0, 0, 0, 0.35);
-  padding: 0.75rem 1.65rem 0.75rem 1.2rem;
+  padding-block: 0.75rem;
+  padding-inline: 1.2rem 1.65rem;
   font-family: var(--font-display);
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -2386,18 +2425,24 @@ html.is-embed .section-steps { display: none !important; }
   font-size: 1.425rem;
 }
 .hero-trailer:hover { color: #fff; border-color: var(--ink); }
-.hero-trailer svg { width: 1.65rem; height: 1.65rem; }
+.hero-trailer svg {
+  width: 1.65rem;
+  height: 1.65rem;
+  flex: 0 0 auto;
+  /* Play glyph stays pointing right in RTL; DOM order + row flex put it
+     at inline-start (the right of the Arabic label). */
+  transform: none;
+}
 @media (max-width: 699px) {
   .hero-trailer {
-    left: auto;
-    right: var(--content-inset);
+    inset-inline-start: auto;
+    inset-inline-end: var(--content-inset);
   }
 }
 .hero-actions {
   position: absolute;
   z-index: 9;
-  left: var(--content-inset);
-  right: var(--content-inset);
+  inset-inline: var(--content-inset);
   bottom: calc(max(3.8rem, env(safe-area-inset-bottom, 0px) + 3.4rem));
   display: flex;
   align-items: stretch;
@@ -2408,7 +2453,7 @@ html.is-embed .section-steps { display: none !important; }
 .hero-actions > * { pointer-events: auto; }
 .hero-highlight {
   margin: 0;
-  margin-right: auto;
+  margin-inline-end: auto;
   flex: 0 1 auto;
   width: max-content;
   min-width: 0;
@@ -2811,7 +2856,8 @@ html.is-embed .enter-gate,
 html.is-embed .skip,
 html.is-embed .cursor-glow,
 html.is-embed .paint-trail,
-html.is-embed .fireflies { display: none !important; }
+html.is-embed .fireflies,
+html.is-embed .site-footer { display: none !important; }
 
 
 /* Keep the timeline's layout/paint off the rest of the page, and promote

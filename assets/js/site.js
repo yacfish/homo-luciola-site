@@ -1912,12 +1912,17 @@ function setupSectionScroll() {
   let buttonQueue = 0;
 
   const maxY = () => Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  // The language menu stays open during wheel/touch: it must not be treated
+  // as an overlay that disables section stepping. Keyboard handling still
+  // ignores keys while that menu has focus, so arrow keys move between
+  // language options rather than sections.
   const overlayOpen = () =>
     document.body.classList.contains("nav-open") ||
-    document.body.classList.contains("lang-menu-open") ||
     document.body.classList.contains("modal-open") ||
     document.body.classList.contains("lightbox-open") ||
     document.documentElement.classList.contains("gate-on");
+  const eventInLangMenu = (e) =>
+    !!(e && e.target && e.target.closest && e.target.closest(".lang-switch, .lang-menu"));
   const offsetDoc = (el) => Math.round(el.getBoundingClientRect().top + (window.scrollY || 0));
   const hasScenes = () => document.body.classList.contains("has-scenes");
   const nowMs = () => (typeof performance !== "undefined" ? performance.now() : Date.now());
@@ -1932,10 +1937,11 @@ function setupSectionScroll() {
       sceneTracks.forEach((el, i) => el.classList.toggle("is-last-scene", i === sceneTracks.length - 1));
     }
     let max = maxY();
-    // After the footer credits went away, a last 170vh pin-track still leaves ~70vh of
-    // animation runway. That used to lead into the footer; now it is a second snap
-    // onto the same last section. Clamp to the last track's start.
-    if (hasScenes() && sceneTracks.length) {
+    const footer = document.querySelector(".site-footer");
+    // Without a footer, leftover runway on the last 170vh pin-track becomes a
+    // second snap onto the same last section, so clamp to that track's start.
+    // With a footer, the last stop is the footer itself.
+    if (hasScenes() && sceneTracks.length && !footer) {
       const lastStart = offsetDoc(sceneTracks[sceneTracks.length - 1]);
       if (Number.isFinite(lastStart)) max = Math.min(max, Math.max(0, lastStart));
     }
@@ -1948,7 +1954,7 @@ function setupSectionScroll() {
     const add = (y) => {
       ys.push(Math.max(0, Math.min(max, Math.round(y))));
     };
-    document.querySelectorAll(".hero-track, .intro-track, .pin-track, .page-intro, .teaser-track, .dossier-section").forEach((el) => add(offsetDoc(el)));
+    document.querySelectorAll(".hero-track, .intro-track, .pin-track, .page-intro, .teaser-track, .dossier-section, .site-footer").forEach((el) => add(offsetDoc(el)));
     add(max);
     ys.sort((a, b) => a - b);
     const merged = [];
@@ -2585,6 +2591,7 @@ function setupSectionScroll() {
     if (onStepBtn && e.key === " ") return;
     if (/^(INPUT|TEXTAREA|SELECT)$/.test(tag) || (tag === "BUTTON" && !onStepBtn) || e.target?.isContentEditable) return;
     if (reduceMq.matches || overlayOpen() || eventInModal(e) || !hasScenes()) return;
+    if (document.body.classList.contains("lang-menu-open") || eventInLangMenu(e)) return;
     const y = window.scrollY || 0;
     const galleryStage = document.querySelector(".is-current-scene .pin-stage-facade");
     if (galleryStage) {

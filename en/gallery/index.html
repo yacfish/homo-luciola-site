@@ -1,14 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" translate="no">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="google" content="notranslate">
 <title>Gallery · Homo-Luciola</title>
 
 <link rel="preload" href="/assets/fonts/big-shoulders-display.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin>
+<meta http-equiv="content-language" content="en">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:locale:alternate" content="nl_BE">
+<meta property="og:locale:alternate" content="de_DE">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="it_IT">
+<meta property="og:locale:alternate" content="pt_PT">
+<meta property="og:locale:alternate" content="ar_AR">
+<meta property="og:locale:alternate" content="ja_JP">
+<meta property="og:locale:alternate" content="ko_KR">
+<meta property="og:locale:alternate" content="zh_CN">
 <link rel="alternate" hreflang="fr" href="/fr/gallery/">
 <link rel="alternate" hreflang="en" href="/en/gallery/">
+<link rel="alternate" hreflang="nl" href="/nl/gallery/">
+<link rel="alternate" hreflang="de" href="/de/gallery/">
+<link rel="alternate" hreflang="es" href="/es/gallery/">
+<link rel="alternate" hreflang="it" href="/it/gallery/">
+<link rel="alternate" hreflang="pt" href="/pt/gallery/">
+<link rel="alternate" hreflang="ar" href="/ar/gallery/">
+<link rel="alternate" hreflang="ja" href="/ja/gallery/">
+<link rel="alternate" hreflang="ko" href="/ko/gallery/">
+<link rel="alternate" hreflang="zh-Hans" href="/zh/gallery/">
 <link rel="alternate" hreflang="x-default" href="/fr/gallery/">
 <link rel="stylesheet" href="/assets/css/style.css">
 <script>
@@ -33,7 +55,7 @@
 <canvas class="paint-trail" aria-hidden="true"></canvas>
 <canvas class="fireflies" aria-hidden="true"></canvas>
 
-<div class="enter-gate" id="enter-gate" role="dialog" aria-modal="true" aria-label="Site entrance" data-enter-gate>
+<div class="enter-gate notranslate" id="enter-gate" role="dialog" aria-modal="true" aria-label="Site entrance" data-enter-gate lang="en" translate="no">
   <div class="enter-gate-inner">
     <p class="enter-gate-mark hero-mark" aria-hidden="true"><svg class="wordmark" role="img" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="16 3.05568 287.6503 231.17434" width="288" height="231" fill="currentColor">
 <path d="M16 3.05568 H303.6503 V13.44672 H16 Z"/>
@@ -52,13 +74,13 @@
 <path d="M240.3152 80.3496 L282.7532 80.3496 L282.7532 67.6776 L240.3152 67.6776 Z"/>
 <path d="M16 223.83898 H303.6503 V234.23002 H16 Z"/>
 </svg></p>
-    <button type="button" class="enter-gate-btn" data-gate-enter>Enter</button>
+    <button type="button" class="enter-gate-btn" data-gate-enter lang="en">Enter</button>
   </div>
 </div>
 <div class="site-chrome">
 <header class="site-header">
   <div class="wrap bar">
-    <a class="logo" href="/en/" aria-label="Homo-Luciola"><svg class="stamp" role="img" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="16 17.1216 87.5003 203.0425" width="88" height="203" fill="currentColor">
+    <a class="logo notranslate" href="/en/" aria-label="Homo-Luciola" translate="no"><svg class="stamp" role="img" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="16 17.1216 87.5003 203.0425" width="88" height="203" fill="currentColor">
 <path d="M16 122.7216 L16 17.1216 L30.256 17.1216 L30.256 62.9266 L45.634 62.9266 L45.634 17.1216 L59.89 17.1216 L59.89 122.7216 L45.634 122.7216 L45.634 75.5976 L30.256 75.5976 L30.256 122.7216 Z"/>
 <path d="M83.5313 123.8437 C76.6453 123.8437 71.6813 122.1787 68.6403 118.8477 C65.5983 115.5167 64.0213 109.9757 63.9063 102.2257 C63.7913 97.0007 63.7153 91.7317 63.6763 86.4197 C63.6383 81.1077 63.6193 75.7837 63.6193 70.4497 C63.6193 65.1167 63.6383 59.8037 63.6763 54.5137 C63.7153 49.2237 63.7913 43.9437 63.9063 38.6757 C64.0213 30.9687 65.5983 25.4497 68.6403 22.1187 C71.6813 18.7877 76.6453 17.1217 83.5313 17.1217 C90.4173 17.1217 95.3623 18.7877 98.3643 22.1187 C101.3673 25.4497 102.9463 30.9687 103.0983 38.6757 C103.2523 43.9877 103.3573 49.2997 103.4143 54.6117 C103.4713 59.9247 103.5003 65.2367 103.5003 70.5487 C103.5003 75.8607 103.4713 81.1617 103.4143 86.4517 C103.3573 91.7427 103.2523 97.0007 103.0983 102.2257 C102.9463 109.9757 101.3673 115.5167 98.3643 118.8477 C95.3623 122.1787 90.4173 123.8437 83.5313 123.8437 M83.5313 112.1527 C85.9793 112.1527 87.7773 111.5537 88.9253 110.3567 C90.0733 109.1597 90.6653 107.2767 90.7043 104.7067 C90.8953 99.3077 91.0193 93.7017 91.0773 87.8887 C91.1343 82.0757 91.1633 76.2087 91.1633 70.2867 C91.1633 64.3647 91.1253 58.5307 91.0483 52.7827 C90.9713 47.0357 90.8573 41.5057 90.7043 36.1937 C90.6653 33.6247 90.0633 31.7407 88.8963 30.5437 C87.7293 29.3467 85.9413 28.7477 83.5313 28.7477 C81.1213 28.7477 79.3323 29.3467 78.1653 30.5437 C76.9993 31.7407 76.3773 33.6247 76.3013 36.1937 C76.1483 41.5057 76.0233 47.0357 75.9273 52.7827 C75.8323 58.5307 75.7943 64.3647 75.8133 70.2867 C75.8323 76.2087 75.8803 82.0757 75.9563 87.8887 C76.0333 93.7017 76.1483 99.3077 76.3013 104.7067 C76.3773 107.2767 76.9993 109.1597 78.1653 110.3567 C79.3323 111.5537 81.1213 112.1527 83.5313 112.1527"/>
 <path d="M16 220.164 L16 113.442 L30.244 113.442 L30.244 207.357 L53.786 207.357 L53.786 220.164 Z"/>
@@ -71,9 +93,9 @@
     <svg class="icon-on" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 9v6h3.2L12 19V5L7.2 9H4zm11.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM13 3.1v2.06A6.5 6.5 0 0 1 19.5 12 6.5 6.5 0 0 1 13 18.84v2.06A8.5 8.5 0 0 0 21.5 12 8.5 8.5 0 0 0 13 3.1z"/></svg>
     <svg class="icon-muted" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 9v6h3.2L12 19V5L7.2 9H4zm11.5 3a4.5 4.5 0 0 0-2.5-4v2.6l2.4 2.4c.07-.32.1-.66.1-1zm4 0c0 .86-.16 1.68-.46 2.43l1.53 1.53A8.45 8.45 0 0 0 21.5 12 8.5 8.5 0 0 0 13 3.1v2.06A6.5 6.5 0 0 1 19.5 12zM13 16.4v2.44a8.46 8.46 0 0 0 3.66-1.52l-1.62-1.62A4.47 4.47 0 0 1 13 16.4zM3.27 2 2 3.27 8.73 10H4v6h3.2L12 20.73v-7.46l4.51 4.51A6.47 6.47 0 0 1 13 18.84v2.06a8.47 8.47 0 0 0 4.37-1.76L19.73 22 21 20.73 3.27 2z"/></svg>
   </button>
-      <nav class="lang-switch">
-    <button type="button" class="lang-switch-btn" aria-expanded="false" aria-controls="lang-menu" aria-haspopup="true" aria-label="Choose the language (English)" title="English">
-      <span class="lang-current">EN</span>
+      <nav class="lang-switch notranslate" translate="no">
+    <button type="button" class="lang-switch-btn notranslate" aria-expanded="false" aria-controls="lang-menu" aria-haspopup="true" aria-label="Choose the language (English)" title="English" translate="no">
+      <span class="lang-current notranslate" translate="no" lang="en"><span lang="en">EN</span></span>
     </button>
     <div id="lang-menu" class="lang-menu" hidden>
       <div class="lang-menu-panel" role="menu" aria-label="Choose the language">
@@ -81,7 +103,7 @@
           <p class="lang-menu-title">Choose the language</p>
           <button type="button" class="lang-menu-close" aria-label="Close">×</button>
         </div>
-        <a class="lang-option" role="menuitem" data-lang-option href="/fr/gallery/" hreflang="fr" lang="fr" title="Français" aria-label="Français">FR</a><a class="lang-option" role="menuitem" data-lang-option href="/en/gallery/" hreflang="en" lang="en" title="English" aria-label="English" aria-current="true">EN</a>
+        <a class="lang-option notranslate" role="menuitem" data-lang-option href="/fr/gallery/" hreflang="fr" lang="fr" translate="no" title="French" aria-label="French"><span lang="fr">FR</span></a><a class="lang-option notranslate" role="menuitem" data-lang-option href="/en/gallery/" hreflang="en" lang="en" translate="no" title="English" aria-label="English" aria-current="true"><span lang="en">EN</span></a><a class="lang-option notranslate" role="menuitem" data-lang-option href="/nl/gallery/" hreflang="nl" lang="nl" translate="no" title="Dutch" aria-label="Dutch"><span lang="nl">NL</span></a><a class="lang-option notranslate" role="menuitem" data-lang-option href="/de/gallery/" hreflang="de" lang="de" translate="no" title="German" aria-label="German"><span lang="de">DE</span></a><a class="lang-option notranslate" role="menuitem" data-lang-option href="/es/gallery/" hreflang="es" lang="es" translate="no" title="Spanish" aria-label="Spanish"><span lang="es">ES</span></a><a class="lang-option notranslate" role="menuitem" data-lang-option href="/it/gallery/" hreflang="it" lang="it" translate="no" title="Italian" aria-label="Italian"><span lang="it">IT</span></a><a class="lang-option notranslate" role="menuitem" data-lang-option href="/pt/gallery/" hreflang="pt" lang="pt" translate="no" title="Portuguese" aria-label="Portuguese"><span lang="pt">PT</span></a><a class="lang-option notranslate" role="menuitem" data-lang-option href="/ar/gallery/" hreflang="ar" lang="ar" translate="no" title="Arabic" aria-label="Arabic"><span lang="ar">AR</span></a><a class="lang-option notranslate" role="menuitem" data-lang-option href="/ja/gallery/" hreflang="ja" lang="ja" translate="no" title="Japanese" aria-label="Japanese"><span lang="ja">JA</span></a><a class="lang-option notranslate" role="menuitem" data-lang-option href="/ko/gallery/" hreflang="ko" lang="ko" translate="no" title="Korean" aria-label="Korean"><span lang="ko">KO</span></a><a class="lang-option notranslate" role="menuitem" data-lang-option href="/zh/gallery/" hreflang="zh-Hans" lang="zh-Hans" translate="no" title="Simplified Chinese" aria-label="Simplified Chinese"><span lang="zh-Hans">ZH</span></a>
       </div>
     </div>
   </nav>
@@ -177,6 +199,21 @@
       </div>
     </main>
 </div>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-copy notranslate" translate="no">© <span data-hl-years>2026</span> Homo-Luciola</p>
+    <p class="footer-nav"><a href="/en/contact/">Contact</a></p>
+  </div>
+</footer>
+<script>
+(function(){
+  var el = document.querySelector("[data-hl-years]");
+  if (!el) return;
+  var start = 2026;
+  var y = new Date().getFullYear();
+  el.textContent = y > start ? String(start) + "–" + y : String(start);
+})();
+</script>
 <div class="hl-lightbox" data-hl-lightbox hidden role="dialog" aria-modal="true" aria-label="Gallery viewer">
     <div class="hl-lightbox-backdrop" data-lightbox-close></div>
     <button type="button" class="hl-lightbox-close" data-lightbox-close aria-label="Close">×</button>
