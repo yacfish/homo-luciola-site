@@ -33,6 +33,36 @@ function box() {
   return document.querySelector("[data-hl-lightbox]");
 }
 
+// Pin the dialog to the visual viewport so a rotation, iOS chrome
+// resize, or pinch-zoom cannot leave the photo or controls off-screen.
+function clearVisualViewport() {
+  const modal = box();
+  if (!modal) return;
+  modal.style.top = "";
+  modal.style.left = "";
+  modal.style.width = "";
+  modal.style.height = "";
+  modal.style.right = "";
+  modal.style.bottom = "";
+}
+
+function syncVisualViewport() {
+  const modal = box();
+  if (!modal || !state || modal.hidden) return;
+  const vv = window.visualViewport;
+  if (!vv) return;
+  modal.style.top = `${vv.offsetTop}px`;
+  modal.style.left = `${vv.offsetLeft}px`;
+  modal.style.width = `${vv.width}px`;
+  modal.style.height = `${vv.height}px`;
+  modal.style.right = "auto";
+  modal.style.bottom = "auto";
+}
+
+function onViewportChange() {
+  syncVisualViewport();
+}
+
 function fillImg(img, item) {
   img.src = item.src;
   img.alt = item.alt || "";
@@ -95,6 +125,13 @@ export function closeLightbox() {
   document.removeEventListener("keydown", onKey, true);
   modal.removeEventListener("wheel", onWheel);
   modal.removeEventListener("touchmove", onWheel);
+  window.removeEventListener("resize", onViewportChange);
+  window.removeEventListener("orientationchange", onViewportChange);
+  if (window.visualViewport) {
+    window.visualViewport.removeEventListener("resize", onViewportChange);
+    window.visualViewport.removeEventListener("scroll", onViewportChange);
+  }
+  clearVisualViewport();
   if (trigger && trigger.isConnected) trigger.focus({ preventScroll: true });
 }
 
@@ -192,6 +229,13 @@ function openLightbox(trigger) {
   modal.addEventListener("touchmove", onWheel, { passive: false });
   state = { modal, items, index, trigger, inerted, onKey, onWheel, animating: false };
   preload(items, index);
+  syncVisualViewport();
+  window.addEventListener("resize", onViewportChange);
+  window.addEventListener("orientationchange", onViewportChange);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", onViewportChange);
+    window.visualViewport.addEventListener("scroll", onViewportChange);
+  }
   const closeBtn = modal.querySelector(".hl-lightbox-close");
   if (closeBtn) closeBtn.focus({ preventScroll: true });
   return true;
