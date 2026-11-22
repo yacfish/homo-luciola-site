@@ -2397,7 +2397,8 @@ html.is-embed .section-steps { display: none !important; }
 
 /* Trial: trailer just under the menu, above the wordmark. Gap from the
    bar's bottom edge is half the header height. Aligned with the logo's
-   inline-start edge (inline-end on phones). No 12.5vw side gap. */
+   inline-start edge on every width (mirrors to inline-end in RTL).
+   No 12.5vw side gap. */
 .hero-mark-row {
   margin: 0 0 1.1rem;
   width: 100%;
@@ -2432,12 +2433,6 @@ html.is-embed .section-steps { display: none !important; }
   /* Play glyph stays pointing right in RTL; DOM order + row flex put it
      at inline-start (the right of the Arabic label). */
   transform: none;
-}
-@media (max-width: 699px) {
-  .hero-trailer {
-    inset-inline-start: auto;
-    inset-inline-end: var(--content-inset);
-  }
 }
 .hero-actions {
   position: absolute;
